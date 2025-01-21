@@ -19,7 +19,7 @@ public class NativeShare {
 		String uriStr = uri != null ? uri.toString() : "";
 		String textStr = text != null ? text : "";
 
-		String mimeType = NativeShare.mimeTypeFromURI(context, uriStr);
+		String mimeType = FileHelperCap.getMimeType(uriStr, context.getContentResolver());
 
         JSObject item = new JSObject();
         item.put("mimeType", mimeType);
@@ -38,7 +38,7 @@ public class NativeShare {
             Uri uri = uriList.get(i);
             String uriStr = uri != null ? uri.toString() : "";
 
-			String mimeType = NativeShare.mimeTypeFromURI(context, uriStr);
+			String mimeType = FileHelperCap.getMimeType(uriStr, context.getContentResolver());
 
             JSObject item = new JSObject();
             item.put("mimeType", mimeType);
@@ -50,14 +50,4 @@ public class NativeShare {
         return items;
     }
 
-	public static String mimeTypeFromURI(Context context, String uriPath) {
-		try {
-			Uri uri = Uri.parse(uriPath);
-			ContentResolver cR = context.getContentResolver();
-			return cR.getType(uri);
-		} catch (Exception e) {
-			Logger.error("mimeTypeFromUri", e);
-			return "";
-		}
-	}
 }
