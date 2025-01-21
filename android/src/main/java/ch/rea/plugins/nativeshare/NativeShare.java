@@ -8,6 +8,7 @@ import android.net.Uri;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class NativeShare {
@@ -18,13 +19,15 @@ public class NativeShare {
 
 		String uriStr = uri != null ? uri.toString() : "";
 		String textStr = text != null ? text : "";
+        String realPath = FileHelperCap.getRealPathFromURI_API11_And_Above(context, uri);
+        String realUri = Uri.fromFile(new File(realPath)).toString();
 
 		String mimeType = FileHelperCap.getMimeType(uriStr, context.getContentResolver());
 
         JSObject item = new JSObject();
         item.put("mimeType", mimeType);
         item.put("text", textStr);
-        item.put("uri", uriStr);
+        item.put("uri", realUri);
 
         return new JSObject[] { item };
     }
