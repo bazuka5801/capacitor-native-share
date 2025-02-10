@@ -1,6 +1,6 @@
 {
 	"name": "@bazuka5801/capacitor-native-share",
-	"version": "5.0.6",
+	"version": "5.2.1",
 	"description": "Converts a native share to an event",
 	"main": "dist/plugin.cjs.js",
 	"module": "dist/esm/index.js",
